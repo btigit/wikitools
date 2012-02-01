@@ -32,6 +32,10 @@ public class Mongo2Neo4j {
     public static final String SERVER_ROOT_URI = "http://10.211.55.11:7474/db/data/";
     public static final String DB_PATH = "data/wiki/";
     public static final String INDEX_NAME = "wiki";
+	
+	public enum WikiRelationshipTypes implements RelationshipType{	
+		LINK,REDIRECT
+	}
 
     /** main */
     @SuppressWarnings("unchecked")
@@ -230,6 +234,10 @@ public class Mongo2Neo4j {
 		return index.get(key, value);
 	}
 
+	public static IndexHits<Node> getNodeByQuery(Index<Node> index, String query){
+		return index.query(query);
+	}
+	
 	public static IndexHits<Node> getNodeByQuery(Index<Node> index, String field, String query){
 		return index.query(field+":\""+QueryParser.escape(query)+"\"");
 	}
@@ -255,10 +263,6 @@ public class Mongo2Neo4j {
 	            graphDb.shutdown();
 	        }
 	    } );
-	}
-	
-	private enum WikiRelationshipTypes implements RelationshipType{	
-		LINK,REDIRECT
 	}
 	
 }

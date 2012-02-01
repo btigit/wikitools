@@ -19,7 +19,7 @@ public class WikipediaModel {
 	private boolean disambiguation = false;
 	private boolean empty = false;
 	
-	enum DocumentType { DOCUMENT, STUB, DISAMBIGUATION , EMPTY}
+	public enum DocumentType { DOCUMENT, STUB, DISAMBIGUATION , EMPTY}
 
     public Long getId() {
         return id;
