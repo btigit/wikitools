@@ -1,4 +1,5 @@
 package tools;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -25,7 +26,7 @@ public class WikiTextParser {
 	private boolean redirect = false;
 	private String redirectString = null;
 	private static Pattern redirectPattern = Pattern
-			.compile("#(REDIRECT|ì]ëó)\\s+\\[\\[(.*?)\\]\\]");
+			.compile("#(REDIRECT|Ëª¢ÈÄÅ)\\s+\\[\\[(.*?)\\]\\]");
 	private boolean stub = false;
 	private boolean disambiguation = false;
 	private static Pattern stubPattern = Pattern.compile("\\-stub\\}\\}");
@@ -33,7 +34,7 @@ public class WikiTextParser {
 			.compile("\\{\\{disambig\\}\\}");
 	private InfoBox infoBox = null;
 
-    /** XMLÇ≈égÇÌÇÍÇƒÇÈì˙ïtå`éÆ */
+    /** XML„Åß‰Ωø„Çè„Çå„Å¶„ÇãÊó•‰ªòÂΩ¢Âºè */
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     
 	public WikiTextParser(String wtext) {
@@ -49,23 +50,23 @@ public class WikiTextParser {
 		disambiguation = matcher.find();
 	}
 	
-    /** page elementì‡ÇÃâêÕ */
+    /** page elementÂÜÖ„ÅÆËß£Êûê */
     public static WikipediaModel pageParse(XMLEventReader reader) throws Exception {
         WikipediaModel model = new WikipediaModel();
         while (reader.hasNext()) {
             XMLEvent event = reader.nextEvent();
             if (isEndElem(event, "page"))
                 break;
-            // revision elementÇÃâêÕÇÕÅArevisonParseÇ…ÇƒçsÇ§
+            // revision element„ÅÆËß£Êûê„ÅØ„ÄÅrevisonParse„Å´„Å¶Ë°å„ÅÜ
             else if (isStartElem(event, "revision"))
                 revisionParse(reader, model);
             // title
             else if (isStartElem(event, "title")) {
                 String title = getText(reader, "title");
-                // É^ÉCÉgÉãÇ…ÉRÉçÉìÇ™ä‹Ç‹ÇÍÇÈèÍçáÇÕä«óùópãLéñÇ»ÇÃÇ≈ÉXÉLÉbÉvÇ∑ÇÈ
+                // „Çø„Ç§„Éà„É´„Å´„Ç≥„É≠„É≥„ÅåÂê´„Åæ„Çå„ÇãÂ†¥Âêà„ÅØÁÆ°ÁêÜÁî®Ë®ò‰∫ã„Å™„ÅÆ„Åß„Çπ„Ç≠„ÉÉ„Éó„Åô„Çã
                 if (title.indexOf(':') != -1)
                     return null;
-                // (ûBñÜÇ≥âÒî)Ç‚(âπäy)Ç»Ç«ÇÃíçéﬂï∂éöÇäOÇ∑
+                // (ÊõñÊòß„ÅïÂõûÈÅø)„ÇÑ(Èü≥Ê•Ω)„Å™„Å©„ÅÆÊ≥®ÈáàÊñáÂ≠ó„ÇíÂ§ñ„Åô
                 int posStart = title.indexOf(" (");
                 int posEnd = title.indexOf(')', posStart);
                 if (posStart != -1 && posEnd != -1) {
@@ -80,7 +81,7 @@ public class WikiTextParser {
         return model;
     }
 
-    /** revision elementì‡ÇÃâêÕ */
+    /** revision elementÂÜÖ„ÅÆËß£Êûê */
     public static void revisionParse(XMLEventReader reader, WikipediaModel model) throws Exception {
         while (reader.hasNext()) {
             XMLEvent event = reader.nextEvent();
@@ -101,7 +102,7 @@ public class WikiTextParser {
         }
     }
 
-    /** éwíËÇÃend tagÇî≠å©Ç∑ÇÈÇ‹Ç≈ÅACHARACTERSÇéÊìæ */
+    /** ÊåáÂÆö„ÅÆend tag„ÇíÁô∫Ë¶ã„Åô„Çã„Åæ„Åß„ÄÅCHARACTERS„ÇíÂèñÂæó */
     public static String getText(XMLEventReader reader, String name) throws Exception {
         StringBuilder builder = new StringBuilder();
         while (reader.hasNext()) {
@@ -117,13 +118,13 @@ public class WikiTextParser {
         return builder.toString();
     }
 
-    /** éwíËñºÇÃStart ElementÇ©îªíËÇ∑ÇÈ */
+    /** ÊåáÂÆöÂêç„ÅÆStart Element„ÅãÂà§ÂÆö„Åô„Çã */
     public static boolean isStartElem(XMLEvent event, String name) {
         return event.getEventType() == XMLStreamConstants.START_ELEMENT
                 && name.equals(event.asStartElement().getName().getLocalPart());
     }
 
-    /** éwíËñºÇÃEnd ElementÇ©îªíËÇ∑ÇÈ */
+    /** ÊåáÂÆöÂêç„ÅÆEnd Element„ÅãÂà§ÂÆö„Åô„Çã */
     public static boolean isEndElem(XMLEvent event, String name) {
         return event.getEventType() == XMLStreamConstants.END_ELEMENT
                 && name.equals(event.asEndElement().getName().getLocalPart());
@@ -187,8 +188,8 @@ public class WikiTextParser {
 
 	public String getPlainText() {
 		String text = wikiText;
-		text = text.replaceAll("&lt;ref&gt;", "Åi");
-		text = text.replaceAll("&lt;/ref&gt", "Åj");
+		text = text.replaceAll("&lt;ref&gt;", "Ôºà");
+		text = text.replaceAll("&lt;/ref&gt", "Ôºâ");
 		text = text.replaceAll("&gt;", ">");
 		text = text.replaceAll("&lt;", "<");
 		text = text.replaceAll("<ref>.*?</ref>", " ");
@@ -203,7 +204,7 @@ public class WikiTextParser {
 		String[] sentences = text.split("\n");
 		StringBuffer buf = new StringBuffer();
 		for (String sentence : sentences) {
-			if(sentence.trim().endsWith("ÅB")){
+			if(sentence.trim().endsWith("„ÄÇ")){
 				buf.append(sentence.trim());
 				buf.append("\n");
 			}
