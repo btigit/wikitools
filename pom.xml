@@ -4,9 +4,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <hadoop.version>1.0.3</hadoop.version>
-    <mahout.version>0.8-SNAPSHOT</mahout.version>
-    <lucene.version>3.6.1</lucene.version>
+    <hadoop.version>1.1.1</hadoop.version>
+    <hive.version>0.9.0</hive.version>
+    <crunch.version>0.4.0-incubating</crunch.version>
+    <mahout.version>0.8-SNAPSHOT-LOCAL</mahout.version>
+    <lucene.version>4.0.0</lucene.version>
   </properties>
   
   <repositories>
@@ -17,6 +19,10 @@
       <releases>
         <enabled>true</enabled>
       </releases>
+    </repository>
+    <repository>
+      <id>ATILIKA dependencies</id>
+      <url>http://www.atilika.org/nexus/content/repositories/atilika</url>
     </repository>
     <repository>
       <id>morphia</id>
@@ -33,6 +39,16 @@
       <version>${hadoop.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-serde</artifactId>
+      <version>${hive.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.crunch</groupId>
+      <artifactId>crunch</artifactId>
+      <version>${crunch.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.mahout</groupId>
       <artifactId>mahout-core</artifactId>
       <version>${mahout.version}</version>
@@ -43,18 +59,13 @@
       <version>${mahout.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.mahout</groupId>
-      <artifactId>mahout-examples</artifactId>
-      <version>${mahout.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-analyzers</artifactId>
+      <artifactId>lucene-analyzers-common</artifactId>
       <version>${lucene.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-kuromoji</artifactId>
+      <artifactId>lucene-analyzers-kuromoji</artifactId>
       <version>${lucene.version}</version>
     </dependency>
     <dependency>
@@ -86,6 +97,13 @@
       <groupId>com.google.code.morphia</groupId>
       <artifactId>morphia</artifactId>
       <version>0.99</version>
+    </dependency>
+    <dependency>
+      <groupId>org.atilika.kuromoji</groupId>
+      <artifactId>kuromoji</artifactId>
+      <version>0.7.7</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <groupId>jp.co.brains_tech.neuron</groupId>

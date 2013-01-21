@@ -15,6 +15,7 @@
       <excludes>
         <exclude>${artifact.groupId}:${artifact.artifactId}</exclude>
         <exclude>org.apache.hadoop:hadoop-core</exclude>
+        <exclude>org.mongodb:mongo-java-driver</exclude>
       </excludes>
     </dependencySet>
   </dependencySets>
@@ -26,5 +27,12 @@
         <exclude>*.jar</exclude>
       </excludes>
     </fileSet>
-  </fileSets>
+<!--     <fileSet>
+      <directory>/Users/noburton88/Developer/eclipse_workspace/neuron-dev/mongodb/mongo-hadoop/core/target/classes</directory>
+      <outputDirectory>/</outputDirectory>
+      <excludes>
+        <exclude>*.jar</exclude>
+      </excludes>
+    </fileSet>
+ -->  </fileSets>
 </assembly>
