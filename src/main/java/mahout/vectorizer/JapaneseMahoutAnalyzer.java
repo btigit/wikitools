@@ -90,13 +90,13 @@ public class JapaneseMahoutAnalyzer extends StopwordAnalyzerBase {
   protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
     Tokenizer tokenizer = new JapaneseTokenizer(reader, userDict, true, mode);
     TokenStream stream = new JapaneseBaseFormFilter(tokenizer);
-    stream = new UnknownWordsTokenFilter(stream, true);
+    stream = new UnknownWordsTokenFilter(stream, false);
     stream = new JapanesePartOfSpeechStopFilter(true, stream, stoptags);
     stream = new CJKWidthFilter(stream);
     stream = new StopFilter(matchVersion, stream, stopwords);
     stream = new JapaneseKatakanaStemFilter(stream);
     stream = new LowerCaseFilter(matchVersion, stream);
-    stream = new PatternReplaceFilter(stream, Pattern.compile("([0-9a-z]+)"), "", true);
+    stream = new PatternReplaceFilter(stream, Pattern.compile("([0-9]+)"), "", true);
     stream = new LengthFilter(true, stream, 3, 20);
     return new TokenStreamComponents(tokenizer, stream);
   }
